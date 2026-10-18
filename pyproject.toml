@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mediaforge-desktop"
+version = "0.1.0"
+description = "Local-first media and document conversion desktop application"
+requires-python = ">=3.12"
+license = "AGPL-3.0-only"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+dependencies = [
+  "PySide6>=6.9,<7",
+  "Pillow>=11.2,<13",
+  "PyMuPDF>=1.26,<2",
+  "pypdf>=5.4,<7",
+  "psutil>=6,<8",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "pytest-qt>=4.4,<5", "PyInstaller>=6.16,<7"]
+
+[project.scripts]
+mediaforge = "mediaforge.app:main"
+
+[project.urls]
+Repository = "https://github.com/sweetljk/MediaForge"
+Issues = "https://github.com/sweetljk/MediaForge/issues"
+
+[tool.setuptools.packages.find]
+include = ["mediaforge*"]
+
+[tool.setuptools.package-data]
+mediaforge = ["resources/*", "resources/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: real conversions using installed engines"]
